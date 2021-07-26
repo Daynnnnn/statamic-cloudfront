@@ -10,19 +10,30 @@ From a standard Statamic V3 site, you can run:
 Then you'll need to add the cloudfront strategy to your static cache config:
 
 ```
-    'strategies' => [
+'strategies' => [
 
-        ...
+    ...
 
-        'cloudfront' => [
-            'driver' => 'cloudfront',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'distribution' => env('CLOUDFRONT_DISTRIBUTION_ID'),
-        ],
-
+    'cloudfront' => [
+        'driver' => 'cloudfront',
+        'key' => env('AWS_ACCESS_KEY_ID'),
+        'secret' => env('AWS_SECRET_ACCESS_KEY'),
+        'region' => env('AWS_DEFAULT_REGION'),
+        'distribution' => env('CLOUDFRONT_DISTRIBUTION_ID'),
     ],
+
+],
+```
+
+Then add the serice provider to `config/app.php`:
+```
+...
+
+/*
+* Package Service Providers...
+*/
+Daynnnnn\Statamic\Cloudfront\ServiceProvider::class,
+...
 ```
 
 ### How it works
