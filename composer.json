@@ -1,0 +1,27 @@
+{
+    "name": "daynnnnn/statamic-cloudfront",
+    "description": "Allows you to use cloudfront as a statamic cache strategy.",
+    "autoload": {
+        "psr-4": {
+            "Daynnnnn\\Statamic\\Cloudfront\\": "src"
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "Statamic Cloudfront",
+            "description": "Allows you to use cloudfront as a statamic cache strategy."
+        },
+        "laravel": {
+            "providers": [
+                "Daynnnnn\\Statamic\\Cloudfront\\ServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "statamic/cms": "^3.0",
+        "aws/aws-sdk-php": "^3.185"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.12.89"
+    }
+}
