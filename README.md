@@ -42,4 +42,3 @@ It's pretty simple; if the page should be cached, it sets the responses cache co
 ### Things to work on
 - Add some tests.
 - Try and remove `aws/aws-sdk-php` dependency.
-- Make sure app cache isn't a source of truth for which pages are in cache, as this can be out of sync with cloudfront.
