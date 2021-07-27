@@ -50,12 +50,7 @@ class CloudfrontCacher extends AbstractCacher
      */
     public function getCachedPage(Request $request)
     {
-        return false;
-    }
-
-    public function hasCachedPage(Request $request)
-    {
-        return false;
+        return null;
     }
 
     /**
@@ -85,37 +80,5 @@ class CloudfrontCacher extends AbstractCacher
         $this->cloudfront->delete([$url]);
 
         $this->forgetUrl($key);
-    }
-
-    public function getCachePaths()
-    {
-        $paths = $this->config('path');
-
-        if (! is_array($paths)) {
-            $paths = [$this->config('locale') => $paths];
-        }
-
-        return $paths;
-    }
-
-    /**
-     * Get the path where static files are stored.
-     *
-     * @param string|null $locale  A specific locale's path.
-     * @return string
-     */
-    public function getCachePath($locale = null)
-    {
-
-    }
-
-    private function isBasenameTooLong($basename)
-    {
-        return strlen($basename) > $this->config('max_filename_length', 255);
-    }
-
-    private function isLongQueryStringPath($path)
-    {
-        return Str::contains($path, '_lqs_');
     }
 }
