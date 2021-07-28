@@ -70,16 +70,20 @@ class CloudfrontCacher extends AbstractCacher
      * @param string $url
      * @return void
      */
-    public function invalidateUrl($url)
+    public function invalidateUrl($urls)
     {
-        $this->cloudfront->delete([$url]);
+        $urls = is_string($urls) ? [$urls] : $urls;
 
-        if (! $key = $this->getUrls()->flip()->get($url)) {
-            // URL doesn't exist, nothing to invalidate.
-            return;
+        $this->cloudfront->delete($urls);
+
+        foreach ($urls as $url) {
+            if (! $key = $this->getUrls()->flip()->get($url)) {
+                // URL doesn't exist, nothing to invalidate.
+                return;
+            }
+
+            $this->forgetUrl($key);
         }
-
-        $this->forgetUrl($key);
     }
 
     /**
@@ -90,8 +94,6 @@ class CloudfrontCacher extends AbstractCacher
      */
     public function invalidateUrls($urls)
     {
-        collect($urls)->each(function ($url) {
-            $this->invalidateUrl($url);
-        });
+        $this->invalidateUrl($urls);
     }
 }
