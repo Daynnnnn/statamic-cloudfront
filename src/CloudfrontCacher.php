@@ -81,4 +81,17 @@ class CloudfrontCacher extends AbstractCacher
 
         $this->forgetUrl($key);
     }
+
+    /**
+     * Invalidate multiple URLs.
+     *
+     * @param array $urls
+     * @return void
+     */
+    public function invalidateUrls($urls)
+    {
+        collect($urls)->each(function ($url) {
+            $this->invalidateUrl($url);
+        });
+    }
 }
