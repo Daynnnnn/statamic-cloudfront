@@ -94,6 +94,8 @@ class CloudfrontCacher extends AbstractCacher
      */
     public function invalidateUrls($urls)
     {
-        $this->invalidateUrl($urls);
+        if ($urls !== null) {
+            $this->invalidateUrl($urls);
+        }
     }
 }
