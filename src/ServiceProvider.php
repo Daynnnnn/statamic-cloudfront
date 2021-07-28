@@ -14,15 +14,15 @@ class ServiceProvider extends AddonServiceProvider
 
     public function register()
     {
-        $config = config('statamic.static_caching.strategies.cloudfront');
+        $cloudfrontStrategies = collect(config('statamic.static_caching.strategies'));
 
-        if ($config !== null) {
-            $this->app[StaticCacheManager::class]->extend('cloudfront', function () use ($config) {
-                return new CloudfrontCacher($this->app[Repository::class], $config);
+        $cloudfrontStrategies->where('driver', 'cloudfront')->each(function ($item, $strategy) {
+            $this->app[StaticCacheManager::class]->extend($strategy, function () use ($strategy) {
+                return new CloudfrontCacher($this->app[Repository::class], $this->getConfig($strategy));
             });
+        });
 
-            $router = $this->app['router'];
-            $router->pushMiddlewareToGroup('web', Middleware\CacheControlHeader::class);
-        }
+        $router = $this->app['router'];
+        $router->pushMiddlewareToGroup('web', Middleware\CacheControlHeader::class);
     }
 }
