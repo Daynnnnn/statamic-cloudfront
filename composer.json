@@ -10,6 +10,11 @@
         "statamic": {
             "name": "Statamic Cloudfront",
             "description": "Allows you to use cloudfront as a statamic cache strategy."
+        },
+        "laravel": {
+            "providers": [
+                "Daynnnnn\\Statamic\\Cloudfront\\ServiceProvider"
+            ]
         }
     },
     "require": {

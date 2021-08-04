@@ -9,10 +9,13 @@ use Statamic\Statamic;
 
 class ServiceProvider extends AddonServiceProvider
 {
-    public function boot()
-    {}
 
     public function register()
+    {
+        //
+    }
+
+    public function boot()
     {
         $cloudfrontStrategies = collect(config('statamic.static_caching.strategies'));
 
