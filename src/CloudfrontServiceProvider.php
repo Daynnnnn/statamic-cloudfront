@@ -7,7 +7,7 @@ use Statamic\Providers\AddonServiceProvider;
 use Statamic\StaticCaching\StaticCacheManager;
 use Statamic\Statamic;
 
-class ServiceProvider extends AddonServiceProvider
+class CloudfrontServiceProvider extends AddonServiceProvider
 {
 
     public function register()

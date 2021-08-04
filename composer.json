@@ -13,7 +13,7 @@
         },
         "laravel": {
             "providers": [
-                "Daynnnnn\\Statamic\\Cloudfront\\ServiceProvider"
+                "Daynnnnn\\Statamic\\Cloudfront\\CloudfrontServiceProvider"
             ]
         }
     },

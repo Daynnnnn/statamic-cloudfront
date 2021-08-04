@@ -7,7 +7,7 @@ Use cloudfront as a static cache driver.
 From a standard Statamic V3 site, you can run:
 `composer require daynnnnn/statamic-cloudfront`
 
-Then you'll need to add the cloudfront strategy to your static cache config:
+Then you'll just need to add the cloudfront strategy to your static cache config:
 
 ```
 'strategies' => [
@@ -23,17 +23,6 @@ Then you'll need to add the cloudfront strategy to your static cache config:
     ],
 
 ],
-```
-
-Then add the serice provider to `config/app.php`:
-```
-...
-
-/*
-* Package Service Providers...
-*/
-Daynnnnn\Statamic\Cloudfront\ServiceProvider::class,
-...
 ```
 
 ### How it works
