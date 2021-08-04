@@ -18,8 +18,7 @@
         }
     },
     "require": {
-        "statamic/cms": "^3.0",
-        "aws/aws-sdk-php": "^3.185"
+        "statamic/cms": "^3.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.89"
