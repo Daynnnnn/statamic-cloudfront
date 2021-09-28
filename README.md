@@ -16,6 +16,7 @@ Then you'll just need to add the cloudfront strategy to your static cache config
 
     'cloudfront' => [
         'driver' => 'cloudfront',
+        'expiry' => null,
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION'),
