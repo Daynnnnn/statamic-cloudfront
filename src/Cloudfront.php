@@ -19,6 +19,7 @@ class Cloudfront
             'credentials' => [
                 'key'    => $config['key'],
                 'secret' => $config['secret'],
+                'token' => $config['token'] ?? null,
             ]
         ]);
     }
