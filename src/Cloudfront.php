@@ -3,6 +3,7 @@
 namespace Daynnnnn\Statamic\Cloudfront;
 
 use Aws\CloudFront\CloudFrontClient;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class Cloudfront
@@ -13,14 +14,14 @@ class Cloudfront
     public function __construct($config) {
         $this->config = $config;
 
+        if (! empty($this->config['key']) && ! empty($this->config['secret'])) {
+            $credentials = Arr::only($this->config, ['key', 'secret', 'token']);
+        }
+
         $this->cloudfront = new CloudfrontClient([
             'version'     => '2020-05-31',
             'region'      => $config['region'],
-            'credentials' => [
-                'key'    => $config['key'],
-                'secret' => $config['secret'],
-                'token' => $config['token'] ?? null,
-            ]
+            'credentials' => $credentials ?? false,
         ]);
     }
 
