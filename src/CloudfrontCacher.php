@@ -38,7 +38,7 @@ class CloudfrontCacher extends AbstractCacher
             return;
         }
 
-        Blink::put('statamic-cloudfront', 'max-age='.$this->config('expiry', '2592000').', public');
+        Blink::put('statamic-cloudfront', 'max-age='.($this->config('expiry') ?? '2592000').', public');
 
         $this->cacheUrl($this->makeHash($url), $url);
     }
