@@ -5,16 +5,15 @@ namespace Daynnnnn\Statamic\Cloudfront;
 use Illuminate\Cache\Repository;
 use Statamic\Providers\AddonServiceProvider;
 use Statamic\StaticCaching\StaticCacheManager;
+use Illuminate\Contracts\Http\Kernel;
 
 class CloudfrontServiceProvider extends AddonServiceProvider
 {
-    public function register()
-    {
-        //
-    }
-
     public function boot()
     {
+        $kernel = $this->app->make(Kernel::class);
+        $kernel->appendMiddlewareToGroup('web', Middleware\CacheControlHeader::class);
+
         $cloudfrontStrategies = collect(config('statamic.static_caching.strategies'));
 
         $cloudfrontStrategies->where('driver', 'cloudfront')->each(function ($item, $strategy) {
@@ -22,8 +21,5 @@ class CloudfrontServiceProvider extends AddonServiceProvider
                 return new CloudfrontCacher($this->app[Repository::class], $this->getConfig($strategy));
             });
         });
-
-        $router = $this->app['router'];
-        $router->pushMiddlewareToGroup('web', Middleware\CacheControlHeader::class);
     }
 }
