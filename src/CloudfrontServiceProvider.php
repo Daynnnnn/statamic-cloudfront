@@ -5,11 +5,9 @@ namespace Daynnnnn\Statamic\Cloudfront;
 use Illuminate\Cache\Repository;
 use Statamic\Providers\AddonServiceProvider;
 use Statamic\StaticCaching\StaticCacheManager;
-use Statamic\Statamic;
 
 class CloudfrontServiceProvider extends AddonServiceProvider
 {
-
     public function register()
     {
         //

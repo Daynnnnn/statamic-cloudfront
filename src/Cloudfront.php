@@ -9,9 +9,11 @@ use Illuminate\Support\Str;
 class Cloudfront
 {
     private $cloudfront;
+
     private $config;
 
-    public function __construct($config) {
+    public function __construct($config)
+    {
         $this->config = $config;
 
         if (! empty($this->config['key']) && ! empty($this->config['secret'])) {
@@ -19,8 +21,8 @@ class Cloudfront
         }
 
         $this->cloudfront = new CloudfrontClient([
-            'version'     => '2020-05-31',
-            'region'      => $config['region'],
+            'version' => '2020-05-31',
+            'region' => $config['region'],
             'credentials' => $credentials ?? false,
         ]);
     }
@@ -28,21 +30,22 @@ class Cloudfront
     /**
      * Clear specific URLs from cloudfront.
      *
-     * @param array $urls
+     * @param  array  $urls
      * @return bool
      */
     public function delete($urls)
     {
         $this->cloudfront->createInvalidation([
-            'DistributionId' => $this->config['distribution'], 
+            'DistributionId' => $this->config['distribution'],
             'InvalidationBatch' => [
                 'CallerReference' => Str::random(16),
                 'Paths' => [
                     'Items' => $urls,
-                    'Quantity' => count($urls)
-                ]
-            ]
+                    'Quantity' => count($urls),
+                ],
+            ],
         ]);
+
         return true;
     }
 
@@ -54,15 +57,16 @@ class Cloudfront
     public function flush()
     {
         $this->cloudfront->createInvalidation([
-            'DistributionId' => $this->config['distribution'], 
+            'DistributionId' => $this->config['distribution'],
             'InvalidationBatch' => [
                 'CallerReference' => Str::random(16),
                 'Paths' => [
                     'Items' => ['/*'],
-                    'Quantity' => 1
-                ]
-            ]
+                    'Quantity' => 1,
+                ],
+            ],
         ]);
+
         return true;
     }
 }
