@@ -18,9 +18,15 @@
         }
     },
     "require": {
-        "statamic/cms": "^3.0"
+        "statamic/cms": "^5.0",
+        "laravel/pint": "^1.20"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.89"
+    },
+    "config": {
+        "allow-plugins": {
+            "pixelfear/composer-dist-plugin": true
+        }
     }
 }
