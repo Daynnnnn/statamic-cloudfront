@@ -19,14 +19,16 @@
     },
     "require": {
         "statamic/cms": "^5.0",
-        "laravel/pint": "^1.20"
+        "aws/aws-sdk-php": "^3.0"
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.12.89"
+        "phpstan/phpstan": "^0.12.89",
+        "laravel/pint": "^1.20"
     },
     "config": {
         "allow-plugins": {
-            "pixelfear/composer-dist-plugin": true
+            "pixelfear/composer-dist-plugin": true,
+            "pestphp/pest-plugin": true
         }
     }
 }
