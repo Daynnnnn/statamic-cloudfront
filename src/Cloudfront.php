@@ -16,15 +16,16 @@ class Cloudfront
     {
         $this->config = $config;
 
-        if (! empty($this->config['key']) && ! empty($this->config['secret'])) {
-            $credentials = Arr::only($this->config, ['key', 'secret', 'token']);
-        }
-
-        $this->cloudfront = new CloudfrontClient([
+        $clientConfig = [
             'version' => '2020-05-31',
             'region' => $config['region'],
-            'credentials' => $credentials ?? false,
-        ]);
+        ];
+
+        if (! empty($this->config['key']) && ! empty($this->config['secret'])) {
+            $clientConfig['credentials'] = Arr::only($this->config, ['key', 'secret', 'token']);
+        }
+
+        $this->cloudfront = new CloudfrontClient($clientConfig);
     }
 
     /**
